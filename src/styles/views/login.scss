@@ -1,0 +1,20 @@
+.sk-login {
+  display: flex;
+  flex-direction: column;
+
+  img {
+    cursor: pointer;
+    margin-top: 1.5625rem;
+    height: 2.875rem;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 50rem) {
+  .sk-login {
+    img {
+      margin-top: 5rem;
+      height: 5rem;
+    }
+  }
+}

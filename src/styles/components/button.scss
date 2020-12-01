@@ -1,0 +1,17 @@
+.sk-button {
+  border: none;
+  background: none;
+  padding: 0.6rem;
+  margin: 0 0.5rem;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background .2s ease,background-image .2s ease,padding-left .2s ease-out;
+}
+
+@media screen and (max-width: 50rem) {
+  .sk-button {
+    font-size: 1.2rem;
+  }  
+}
