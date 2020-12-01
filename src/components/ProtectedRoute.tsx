@@ -6,7 +6,7 @@ function ProtectedRoute({ children, ...others }: PropsWithChildren<RouteProps>) 
   const { user } = useContext(Auth);
 
   function render({ location }: RouteComponentProps) {
-    if (user.displayName !== null) {
+    if (user.displayName !== '') {
       return children;
     } else {
       return (

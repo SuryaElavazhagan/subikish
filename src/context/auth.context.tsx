@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import { createContext, PropsWithChildren, useReducer } from "react";
+import { createContext, PropsWithChildren, useEffect, useReducer } from "react";
 
 interface AuthState {
   user: firebase.UserInfo;
@@ -49,6 +49,41 @@ function AuthProvider({ children }: PropsWithChildren<object>) {
     phoneNumber: firebase.auth().currentUser?.phoneNumber ?? '',
     photoURL: firebase.auth().currentUser?.photoURL ?? '',
   });
+
+  useEffect(() => {
+    let unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      debugger;
+      if (user) {
+        dispatch({
+          type: 'signin',
+          payload: {
+            providerId: user.providerId,
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            photoURL: user.photoURL
+          }
+        });
+      } else {
+        dispatch({
+          type: 'signout',
+          payload: {
+            providerId: '',
+            uid: '',
+            displayName: null,
+            email: null,
+            phoneNumber: null,
+            photoURL: null
+          }
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   async function signIn() {
     const provider = new firebase.auth.GoogleAuthProvider();
